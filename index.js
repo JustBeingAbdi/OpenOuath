@@ -2,7 +2,7 @@ let express = require("express");
 let db = require("./db");
 let mongoose = require("mongoose");
 let api = express();
-let openouath = require("openouath");
+let openouath = require("openauth");
 
 api.use(async(req, res, next) => {
     req.database = db;
