@@ -23,6 +23,11 @@ auth.get("/github/callback", async(req, res) => {
         let access_token = response.data.access_token;
         let TokenDB = await db.CreateToken(access_token);
         res.redirect(`${stateDB.callback}?code=${TokenDB.token}`);
+
+        setTimeout(function() {
+            stateDB.delete();
+            TokenDB.delete();
+        }, 300000)
     });
     
 
