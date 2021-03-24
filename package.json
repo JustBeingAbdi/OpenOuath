@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/JustBeingAbdi/openOuath-api#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "mongoose": "^5.12.1",
     "openouath-api": "^1.0.0",
