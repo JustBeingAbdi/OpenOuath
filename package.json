@@ -1,5 +1,5 @@
 {
-  "name": "openouath-api",
+  "name": "openouathapi",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,7 +19,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.12.1",
-    "openouath": "^1.0.0",
+    "openouath-api": "^1.0.0",
     "secure-random-string": "^1.1.3"
   }
 }
