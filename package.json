@@ -19,6 +19,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "express": "^4.17.1",
+    "join": "^3.0.0",
     "mongoose": "^5.12.1",
     "openouath-api": "^1.0.0",
     "secure-random-string": "^1.1.3"
