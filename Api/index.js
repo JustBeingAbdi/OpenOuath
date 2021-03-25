@@ -44,7 +44,7 @@ api.get("/get/user", async(req, res) => {
   }).then(async(response) => {
       res.send(response.data);
   })
-})
+});
 
 
 api.listen(3003)
