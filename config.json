@@ -1,6 +1,8 @@
 {
     "url": "https://api.openauth.cf",
     "database": "",
-    "clientID": "",
-    "clientSecret": ""
+    "facebook_clientID": "",
+    "facebook_clientSecret": "",
+    "github_clientID": "",
+    "github_clientSecret": ""
 }
