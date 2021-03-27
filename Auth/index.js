@@ -62,7 +62,7 @@ auth.get("/facebook/callback", async(req, res) => {
 })
 auth.get("/github", async(req, res) => {
     let state = req.query.state;
-    res.redirect(`https://github.com/login/oauth/authorize?client_id=${config.clientID}&state=${state}`);
+    res.redirect(`https://github.com/login/oauth/authorize?client_id=${config.github_clientID}&state=${state}`);
 });
 auth.get("/facebook", async(req, res) => {
     let state = req.query.state;
