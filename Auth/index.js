@@ -5,6 +5,7 @@ let axios = require("axios");
 let auth = express();
 let config = require("../config.json");
 let facebook = require("../Auth/Services/facebook.js");
+let google = require("../Auth/Services/google.js");
 
 
 
@@ -60,6 +61,19 @@ auth.get("/facebook/callback", async(req, res) => {
         }, 300000)
     });
 })
+auth.get("/google/callback", async(req,res) => {
+    let stateDB = await db.GetState(req.query.state);
+    if(!stateDB) return res.redirect(`/ouath/error?service=google&state=${req.query.state || 'Unknown'}&message=Invalid+State`);
+    let code = req.query.code;
+    let TokenDB = await db.CreateToken(code);
+    res.redirect(`${stateDB.callback}?code=${TokenDB.token}`);
+
+    setTimeout(function() {
+            stateDB.delete();
+            TokenDB.delete();
+        }, 300000)
+    
+})
 auth.get("/github", async(req, res) => {
     let state = req.query.state;
     res.redirect(`https://github.com/login/oauth/authorize?client_id=${config.github_clientID}&state=${state}`);
@@ -68,6 +82,11 @@ auth.get("/facebook", async(req, res) => {
     let state = req.query.state;
     let url = facebook.GenerateFUrl(state);
     return res.redirect(`https://www.facebook.com/v10.0/dialog/oauth?client_id=${config.facebook_clientID}&redirect_uri=https://ouath.openauth.cf/facebook/callback&state=${state}&response_type=code`);
+})
+auth.get("/google", async(req, res) => {
+    let state = req.query.state;
+    let googleauth = await google.GenerateUrl(state);
+    res.redirect(googleauth);
 })
 
 

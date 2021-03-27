@@ -4,6 +4,9 @@ let mongoose = require("mongoose");
 let api = express();
 let axios = require("axios");
 let facebook = require("../Auth/Services/facebook");
+let google = require("../Auth/Services/google");
+
+
 
 api.use(async(req, res, next) => {
     req.database = db;
@@ -33,6 +36,13 @@ api.all("/facebook/generate/url", async(req, res) => {
         message: "Generated",
         url: `https://ouath.openauth.cf/facebook?state=${stateDB.state}`
     });
+});
+api.all("/google/generate/url", async(req, res) => {
+    let stateDB = await db.CreateState(req.query.callback);
+    return res.status(200).send({
+        message: 'Generated',
+        url: `https://ouath.openauth.cf/google?state=${stateDB.state}`
+    });
 })
 
 api.get("/", async(req, res) => {
@@ -54,6 +64,14 @@ api.get("/github/get/user", async(req, res) => {
       res.send(response.data);
   })
 });
+api.get("/google/get/user", async(req,res) => {
+    let access_token = req.query.access_token;
+    if(!access_token) return res.status(404).end();
+
+    let tokenDB = await db.FindToken(access_token);
+    let googledata = await google.GetUser(tokenDB.access_token);
+    res.send(googledata);
+})
 api.get("/facebook/get/user", async(req, res) => {
     let access_token = req.query.access_token;
     if(!access_token) return res.status(404).end();

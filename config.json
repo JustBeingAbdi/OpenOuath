@@ -4,5 +4,7 @@
     "facebook_clientID": "",
     "facebook_clientSecret": "",
     "github_clientID": "",
-    "github_clientSecret": ""
+    "github_clientSecret": "",
+    "google_clientID": "",
+    "google_clientSecret": ""
 }
