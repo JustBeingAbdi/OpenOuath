@@ -33,7 +33,7 @@ auth.get("/github/callback", async(req, res) => {
     
 
 });
-auth.get("facebook/callback", async(req, res) => {
+auth.get("/facebook/callback", async(req, res) => {
     let code = req.query.code;
 
     axios.default({
