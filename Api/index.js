@@ -26,7 +26,7 @@ api.get("/github/generate/url", async(req, res) => {
         url: `https://ouath.openauth.cf/github/?state=${stateDB.state}`,
     });
 });
-api.all("facebook/generate/url", async(req, res) => {
+api.all("/facebook/generate/url", async(req, res) => {
     let stateDB = await db.CreateState(req.query.callback);
 
     return res.status(200).send({
