@@ -26,6 +26,7 @@
     "mongoose": "^5.12.1",
     "openouath-api": "^1.0.0",
     "openouath-package": "^1.1.1",
+    "path": "^0.12.7",
     "query-string": "^7.0.0",
     "querystring": "^0.2.1",
     "secure-random-string": "^1.1.3"
