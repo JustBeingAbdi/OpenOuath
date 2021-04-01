@@ -18,7 +18,7 @@ api.post("/github/generate/url", async(req, res) => {
 
     return res.status(200).send({
         message: "Generated",
-        url: `https://ouath.openauth.cf/github/?state=${stateDB.state}`,
+        url: `https://ouath.openouath.cf/github/?state=${stateDB.state}`,
     });
 });
 api.get("/github/generate/url", async(req, res) => {
@@ -26,7 +26,7 @@ api.get("/github/generate/url", async(req, res) => {
 
     return res.status(200).send({
         message: "Generated",
-        url: `https://ouath.openauth.cf/github/?state=${stateDB.state}`,
+        url: `https://ouath.openouath.cf/github/?state=${stateDB.state}`,
     });
 });
 api.all("/facebook/generate/url", async(req, res) => {
@@ -34,19 +34,19 @@ api.all("/facebook/generate/url", async(req, res) => {
 
     return res.status(200).send({
         message: "Generated",
-        url: `https://ouath.openauth.cf/facebook?state=${stateDB.state}`
+        url: `https://ouath.openouath.cf/facebook?state=${stateDB.state}`
     });
 });
 api.all("/google/generate/url", async(req, res) => {
     let stateDB = await db.CreateState(req.query.callback);
     return res.status(200).send({
         message: 'Generated',
-        url: `https://ouath.openauth.cf/google?state=${stateDB.state}`
+        url: `https://ouath.openouath.cf/google?state=${stateDB.state}`
     });
 })
 
 api.get("/", async(req, res) => {
-    res.redirect(`https://openauth.cf`);
+    res.send('Api is Online');
 });
 
 api.get("/github/get/user", async(req, res) => {

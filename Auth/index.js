@@ -43,7 +43,7 @@ auth.get("/facebook/callback", async(req, res) => {
         params: {
       client_id: config.facebook_clientID,
       client_secret: config.facebook_clientSecret,
-      redirect_uri: 'https://ouath.openauth.cf/facebook/callback',
+      redirect_uri: 'https://ouath.openouath.cf/facebook/callback',
       code,
     }
 
@@ -81,7 +81,7 @@ auth.get("/github", async(req, res) => {
 auth.get("/facebook", async(req, res) => {
     let state = req.query.state;
     let url = facebook.GenerateFUrl(state);
-    return res.redirect(`https://www.facebook.com/v10.0/dialog/oauth?client_id=${config.facebook_clientID}&redirect_uri=https://ouath.openauth.cf/facebook/callback&state=${state}&response_type=code`);
+    return res.redirect(`https://www.facebook.com/v10.0/dialog/oauth?client_id=${config.facebook_clientID}&redirect_uri=https://ouath.openouath.cf/facebook/callback&state=${state}&response_type=code`);
 })
 auth.get("/google", async(req, res) => {
     let state = req.query.state;

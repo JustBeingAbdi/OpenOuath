@@ -17,7 +17,7 @@ module.exports.GenerateUrl = async(state) => {
       'https://www.googleapis.com/auth/userinfo.email',
     ];
 
-    return `https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&amp;prompt=consent&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&client_id=${config.google_clientID}&redirect_uri=https://ouath.openauth.cf/google/callback&state=${state}`
+    return `https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&amp;prompt=consent&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&client_id=${config.google_clientID}&redirect_uri=https://ouath.openouath.cf/google/callback&state=${state}`
         
     }
 
