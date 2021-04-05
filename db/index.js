@@ -13,6 +13,15 @@ module.exports.CreateState = async(callback) => {
     stateDB.save();
     return stateDB;
 }
+module.exports.CreateCustomState = async(state, callback) => {
+    
+    let stateDB = new StateDB({
+        state: state,
+        callback: callback
+    });
+    stateDB.save();
+    return stateDB;
+}
 module.exports.GetState = async(state) => {
     let stateDB = await StateDB.findOne({state: state});
     if(stateDB) return stateDB;

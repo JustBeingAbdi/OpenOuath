@@ -21,6 +21,7 @@ api.post("/github/generate/url", async(req, res) => {
         url: `https://ouath.openouath.cf/github/?state=${stateDB.state}`,
     });
 });
+
 api.get("/github/generate/url", async(req, res) => {
     let stateDB = await db.CreateState(req.query.callback);
 
@@ -29,6 +30,20 @@ api.get("/github/generate/url", async(req, res) => {
         url: `https://ouath.openouath.cf/github/?state=${stateDB.state}`,
     });
 });
+
+api.get("/custom/generate/url", async(req,res) => {
+    let state = req.query.state;
+    let callback = req.query.callback;
+    if(!state || !callback) return res.status(404).end();
+
+    let stateDB = await db.CreateCustomState(state, callback);
+
+    return res.status(200).send({
+        message: 'State created!'
+    });
+
+
+})
 api.all("/facebook/generate/url", async(req, res) => {
     let stateDB = await db.CreateState(req.query.callback);
 
