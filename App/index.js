@@ -88,7 +88,7 @@ let openouath = require("openouath-package");
 
            req.session.token = userDB.token;
            req.session.user = userDB;
-           console.log(req.session.user.email)
+           
 
            res.send(userDB.token);
        });
@@ -162,6 +162,43 @@ let openouath = require("openouath-package");
         }
 
     });
+
+
+    app.get("/:type/services/logout", async(req,res) => {
+        let key = req.query.key;
+    
+     
+     let network = req.query.network;
+
+     if(network === 'ddc_redirect'){
+        res.redirect(`${config.ddc_url}/~/services/logout?key=${key}&network=ddc`);
+     }
+     if(network === 'ddc'){
+         res.render("access/logout", {redirect:`${config.accounts_url}/myaccount/services/logout?key=${key}&network=myaccount`, token:key})
+     }
+     if(network === 'myaccount'){
+         res.render("access/logout", {redirect: `${config.app_url}?message=logged_out`, token:key});
+     }
+
+    });
+
+    app.get("/services/logout", async(req,res) => {
+     let key = req.session.user.token;
+     req.session.destroy();
+     
+     let network = req.query.network;
+
+     if(network === 'ddc_redirect'){
+        res.redirect(`${config.ddc_url}/~/services/logout?key=${key}&network=ddc`);
+     }
+     if(network === 'ddc'){
+         res.render("access/logout", {redirect:`${config.accounts_url}/myaccount/services/logout?key=${key}&network=myaccount`, token:key})
+     }
+     if(network === 'myaccount'){
+         res.render("access/logout", {redirect: `${config.app_url}?message=logged_out`, token:key});
+     }
+
+ });
        
     
 

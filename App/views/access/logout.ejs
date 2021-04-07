@@ -1,0 +1,11 @@
+<html>
+    <body>
+        <p>Logging out...</p>
+
+        <script>
+            localStorage.setItem("token", "false");
+            window.location.assign("<%= redirect %>")
+            
+        </script>
+    </body>
+</html>
