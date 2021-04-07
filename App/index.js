@@ -51,9 +51,9 @@ let openouath = require("openouath-package");
         res.render("index", {db:db});
     });
     app.get("/login", async(req, res) => {
-        let githuburl = await openouath.GenerateOuathURL('https://openouath.cf/ouath/github/callback?type=github', 'github');
-        let googleurl = await openouath.GenerateOuathURL('https://openouath.cf/ouath/google/callback', 'google');
-        let facebookurl = await openouath.GenerateOuathURL('https://openouath.cf/ouath/facebook/callback', 'facebook');
+        let githuburl = await openouath.GenerateOuathURL(`${config.app_url}/ouath/github/callback`, 'github');
+        let googleurl = await openouath.GenerateOuathURL(`${config.app_url}/ouath/google/callback`, 'google');
+        let facebookurl = await openouath.GenerateOuathURL(`${config.app_url}/ouath/facebook/callback`, 'facebook');
         res.render("access/login", {
             db:db,
             github:githuburl,
