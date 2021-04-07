@@ -1,10 +1,16 @@
 {
-    "url": "https://api.openauth.cf",
+    "url": "https://api.openouath.cf",
     "database": "",
     "facebook_clientID": "",
     "facebook_clientSecret": "",
     "github_clientID": "",
     "github_clientSecret": "",
     "google_clientID": "",
-    "google_clientSecret": ""
+    "google_clientSecret": "",
+    
+
+    
+    "accounts_url": "",
+    "ddc_url": "",
+    "app_url": ""
 }

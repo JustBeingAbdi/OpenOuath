@@ -1,0 +1,166 @@
+<%- include("../partials/header") %>
+<link rel="stylesheet" type="text/css" href="/css/app/style.css">
+<link rel="stylesheet" href="/css/app/ouath.css">
+<script src="/js/app/ouath-buttons.js"></script>
+<title> Login - OpenOuath </title>
+
+<div id="main" class="container text-center text-light" style="padding-top: 110px; padding-bottom: 20px;">
+    
+        <h2>Login</h2>
+
+            <form id="loginform">
+                <input id="email" type="email" class="form-control" placeholder="Email">
+                <input id="password" type="password" class="form-control" placeholder="Password">
+                
+
+                <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</button>
+                <p id="errortext"></p> <a id="reset_password" href="#" style="display: none;" onclick="window.location.assign('/reset-password')">Reset Password</a>
+
+
+            </form>
+             <br>
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#ouath"><i class="fas fa-sign-in-alt"></i> Login with Ouath</button><button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#signup"><i class="fas fa-sign-in-alt"></i> Signup</button>
+
+
+</div>
+
+<script src="/js/app/index.js"></script>
+<script src="/js/app/services/login.js"></script>
+
+<script>
+    var tokendata = (localStorage.getItem("token")) || (localStorage.setItem("token", false));
+    if(tokendata === 'false') return;
+    let request = new XMLHttpRequest();
+    request.open("GET", `/backend/db/verify/token?item=${tokendata}`);
+    request.send();
+
+    setTimeout(function() {
+        let respons = request.response;
+        if(respons === '200'){
+             window.location.assign("/");
+        }
+    }, 1500)
+
+</script>
+
+
+
+
+
+
+<div id="signup" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header btn-info disabled">
+                <h4 class="modal-title">Signup</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                
+                    <form id="signform">
+                    <input type="text" class="form-control" id="name" placeholder="Full Name">
+                    
+                    <input type="email" class="form-control" id="semail" placeholder="Enter Email">
+                    
+                    <input type="password" class="form-control" id="spassword" placeholder="Enter Password">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Signup</button>
+                    <p id="signuptext"></p>
+                    <a id="reset_password1" href="#" style="display: none;" onclick="window.location.assign('/reset-password')">Reset Password</a>
+                </form>
+              </div>
+              <div class="modal-footer"><button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button></div>
+            </div>
+          </div>
+        </div>
+
+<script>
+    document.getElementById("signform").addEventListener("submit", function(event) {
+    event.preventDefault();
+    Signup();
+});
+
+
+
+function Signup() {
+    
+    document.getElementById("reset_password1").style.display = 'none'
+    let email = document.getElementById("semail").value;
+    let password = document.getElementById("spassword").value;
+    let name = document.getElementById("name").value;
+
+    if(!email || !password || !name){
+        document.getElementById("signuptext").textContent = "Fields hasn't been filled out!";
+            return document.getElementById("reset_password").style.display = 'block'
+    }
+
+     document.getElementById("signuptext").textContent = "Signing in..."
+
+    let request = new XMLHttpRequest();
+    request.open('GET', `/backend/db/signup?email=${email}&password=${password}&name=${name}`);
+    request.send();
+
+    setTimeout(function() {
+
+        let request_respons = request.response;
+        let respons = request_respons
+        
+        
+
+        if(respons === '404'){
+            document.getElementById("signuptext").textContent = 'Email is already used in an account!';
+            return document.getElementById("reset_password1").style.display = 'block'
+        } else {
+            document.getElementById("signuptext").textContent = "Signed in! Redirecting...";
+
+            localStorage.setItem("token", respons);
+            localStorage.setItem("email", email);
+            setTimeout(function() {
+                window.location.assign(`/services/login?key=${respons}&host=https://${window.location.hostname}&network=main`);
+            }, 1000)
+        }
+    }, 3500)
+
+
+    
+}
+
+
+</script>
+
+
+
+
+
+
+
+        <div id="ouath" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header btn-info disabled">
+                <h4 class="modal-title">Login with ouath</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <div class="lbtn lbtn-flat lbtn-github" onclick="window.location.assign('<%= github %>')">
+                <i class="logo"></i>
+                <p class="label">
+                    Login with Github
+                </p>
+            </div>
+            <div class="lbtn lbtn-flat lbtn-facebook" onclick="window.location.assign('<%= facebook %>')">
+                <i class="logo"></i>
+                <p class="label">
+                    Login with Facebook
+                </p>
+            </div>
+            <div class="lbtn lbtn-flat lbtn-google" onclick="window.location.assign('<%= google %>')">
+                <i class="logo"></i>
+                <p class="label">
+                    Login with Google
+                </p>
+            </div>
+              </div>
+              <div class="modal-footer"><button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button></div>
+            </div>
+          </div>
+        </div>

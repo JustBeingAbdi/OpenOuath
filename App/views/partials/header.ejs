@@ -60,7 +60,26 @@
                         <a class="nav-link" target="_blank" href="https://github.com/JustBeingAbdi/OpenOuath">Github</a>
                     </li>
                 </ul>
-                 
+                 <ul id="headerloggedin" class="navbar-nav" style="display: none;">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <img  src="/images/app/account.jpg" class="rounded-circle" height="42" alt="Avatar"> <span id="header_username" style="padding-left: 10px;">Unknown</span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><h6 class="dropdown-header">Menu</h6></li>
+                            <li><a id="account1" class="dropdown-item" href="#"><i class="far fa-user"></i>Manage Account</a></li>
+                            <li><a id="app1" class="dropdown-item" href="#"><i class="fas fa-server"></i> Dashboard</a></li>
+                            <hr>
+                            <li><a id="logout1" class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+                        </ul>
+                        </li>
+                    </ul>
+               
+                    
+                        <a id="headerlogin" href="/login" class="btn btn-outline-light btn-lg" type="button" data-ripple-color="dark">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                        
                     
                 
             </div>
@@ -68,3 +87,4 @@
     </nav>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.js"></script>
+<script src="/js/app/header.js"></script>

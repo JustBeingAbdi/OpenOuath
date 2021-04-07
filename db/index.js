@@ -1,7 +1,7 @@
-const StateDB = require("./Schemas/State.js"),
-TokenDB = require("./Schemas/Token.js"),
+const StateDB = require("./Schemas/Ouath/State.js"),
+TokenDB = require("./Schemas/Ouath/Token.js"),
 srs = require("secure-random-string"),
-UserDB = require("./Schemas/User.js");
+UserDB = require("./Schemas/App/User.js");
 
 // State Database
 module.exports.CreateState = async(callback) => {
@@ -44,12 +44,13 @@ module.exports.FindToken = async(token) => {
 
 // User Database
 
-module.exports.CreateUser = async(email, password, type) => {
+module.exports.CreateUser = async(email, name, password, type) => {
     let userDB = new UserDB({
         token: srs({length:40}),
         email: email,
+        name: name,
         password: password,
-        type: type
+        ouath: type
     });
     userDB.save();
     return userDB;
@@ -57,5 +58,15 @@ module.exports.CreateUser = async(email, password, type) => {
 
 module.exports.GetUserViaToken = async(token) => {
     let userDB = await UserDB.findOne({token: token});
+    if(userDB) return userDB;
+}
+
+module.exports.GetUserViaEmail = async(email) => {
+    let userDB = await UserDB.findOne({email:email});
+    if(userDB) return userDB;
+}
+
+module.exports.GetUser = async(email, password) => {
+    let userDB = await UserDB.findOne({email: email, password: password});
     if(userDB) return userDB;
 }
