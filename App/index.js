@@ -88,6 +88,7 @@ let openouath = require("openouath-package");
 
            req.session.token = userDB.token;
            req.session.user = userDB;
+           console.log(req.session.user.email)
 
            res.send(userDB.token);
        });
