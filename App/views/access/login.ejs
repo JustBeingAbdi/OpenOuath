@@ -105,14 +105,9 @@
 
             localStorage.setItem("token", respons);
             localStorage.setItem("email", email);
-            let ddcrequest = new XMLHttpRequest();
-            let accrequest = new XMLHttpRequest();
-            ddcrequest.open("GET", `<%= config.ddc_url %>/services/token?token=${respons}`);
-            accrequest.open("GET", `<%= config.accounts_url %>/services/token?token=${respons}`);
-            ddcrequest.send();
-            accrequest.send();
+            
             setTimeout(function() {
-                window.location.assign(`/`);
+                window.location.assign(`/services/login?key=${respons}&network=ddc_redirect`);
             }, 1000)
         }
     }, 3500)
@@ -166,16 +161,11 @@ function Signup() {
             return document.getElementById("reset_password1").style.display = 'block'
         } else {
             document.getElementById("signuptext").textContent = "Signed in! Redirecting...";
-            let ddcrequest = new XMLHttpRequest();
-            let accrequest = new XMLHttpRequest();
-            ddcrequest.open("GET", `<%= config.ddc_url %>/services/token?token=${respons}`);
-            accrequest.open("GET", `<%= config.accounts_url %>/services/token?token=${respons}`);
-            ddcrequest.send();
-            accrequest.send();
+            
             localStorage.setItem("token", respons);
             localStorage.setItem("email", email);
             setTimeout(function() {
-                window.location.assign(`/services/login?key=${respons}&host=https://${window.location.hostname}&network=main`);
+                window.location.assign(`/services/login?key=${respons}&network=ddc_redirect`);
             }, 1000)
         }
     }, 3500)

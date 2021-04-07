@@ -114,16 +114,40 @@ let openouath = require("openouath-package");
        // Services
 
 
-       app.get("/services/login", async(req,res) => {
-           let key = req.query.token;
-           let host = req.query.host;
+       app.get("/:type/services/login", async(req,res) => {
+           let key = req.query.key;
+           
            let network = req.query.network;
 
+           if(network === 'ddc_redirect'){
+              res.redirect(`${config.ddc_url}/~/services/login?key=${key}&network=myaccount`);
+           }
+           if(network === 'ddc'){
+               res.render("/token", {redirect:`${config.accounts_url}/myaccount/services/login?key=${key}&network=myaccount`})
+           }
+           if(network === 'myaccount'){
+               res.render("/token", {redirect: `${config.app_url}`});
+           }
+
        });
-       app.get("/:type/services/token", async(req,res) => {
-           let token = req.query.token;
-           res.render("token", {token:token});
-       })
+
+       app.get("/services/login", async(req,res) => {
+        let key = req.query.key;
+        
+        let network = req.query.network;
+
+        if(network === 'ddc_redirect'){
+           res.redirect(`${config.ddc_url}/~/services/login?key=${key}&network=myaccount`);
+        }
+        if(network === 'ddc'){
+            res.render("/token", {redirect:`${config.accounts_url}/myaccount/services/login?key=${key}&network=myaccount`})
+        }
+        if(network === 'myaccount'){
+            res.render("/token", {redirect: `${config.app_url}`});
+        }
+
+    });
+       
     
 
 app.listen(3005);
