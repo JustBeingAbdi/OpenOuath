@@ -87,7 +87,7 @@ function Signup() {
             ddcrequest.send();
             accrequest.send();
             setTimeout(function() {
-                window.location.assign(`/services/login?key=${respons}&host=https://${window.location.hostname}&network=main`);
+                window.location.assign(`/`);
             }, 1000)
         }
     }, 3500)
