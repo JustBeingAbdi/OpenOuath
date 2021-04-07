@@ -20,7 +20,7 @@ let openouath = require("openouath-package");
     app.use(express.static(path.join(__dirname, "./public")));
     app.set('trust proxy', true);
     app.use(session({
-      name: 'session.openouath.cf',
+      name: 'cookies.openouath.cf',
       secret: 'ouathsession%&%/!/!)_hi!!!!',
       saveUninitialized: true,
       resave: true,
@@ -63,6 +63,18 @@ let openouath = require("openouath-package");
         });
         });
 
+        app.get("/redirect", async(req,res) => {
+            let path = req.query.path;
+
+            if(path === 'dc'){
+                res.redirect(`${config.ddc_url}`);
+
+            }
+            if(path === 'accounts/manage'){
+                res.redirect(`${config.accounts_url}/manage`)
+            }
+        })
+
        // Backend
 
 
@@ -75,6 +87,7 @@ let openouath = require("openouath-package");
            if(!userDB ) return res.send("404");
 
            req.session.token = userDB.token;
+           req.session.user = userDB;
 
            res.send(userDB.token);
        });
@@ -91,6 +104,7 @@ let openouath = require("openouath-package");
            let userDB = await db.CreateUser(email,name,password,false);
            if(userDB){
                req.session.token = userDB.token;
+               req.session.user = userDB;
                return res.send(userDB.token);
            }
 
@@ -137,7 +151,7 @@ let openouath = require("openouath-package");
         let network = req.query.network;
 
         if(network === 'ddc_redirect'){
-           res.redirect(`${config.ddc_url}/~/services/login?key=${key}&network=myaccount`);
+           res.redirect(`${config.ddc_url}/~/services/login?key=${key}&network=ddc`);
         }
         if(network === 'ddc'){
             res.render("token", {redirect:`${config.accounts_url}/myaccount/services/login?key=${key}&network=myaccount`, token:key})
