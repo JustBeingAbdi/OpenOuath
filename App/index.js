@@ -123,10 +123,10 @@ let openouath = require("openouath-package");
               res.redirect(`${config.ddc_url}/~/services/login?key=${key}&network=myaccount`);
            }
            if(network === 'ddc'){
-               res.render("token", {redirect:`${config.accounts_url}/myaccount/services/login?key=${key}&network=myaccount`})
+               res.render("token", {redirect:`${config.accounts_url}/myaccount/services/login?key=${key}&network=myaccount`, token:key})
            }
            if(network === 'myaccount'){
-               res.render("token", {redirect: `${config.app_url}`});
+               res.render("token", {redirect: `${config.app_url}`, token:key});
            }
 
        });
@@ -140,10 +140,10 @@ let openouath = require("openouath-package");
            res.redirect(`${config.ddc_url}/~/services/login?key=${key}&network=myaccount`);
         }
         if(network === 'ddc'){
-            res.render("token", {redirect:`${config.accounts_url}/myaccount/services/login?key=${key}&network=myaccount`})
+            res.render("token", {redirect:`${config.accounts_url}/myaccount/services/login?key=${key}&network=myaccount`, token:key})
         }
         if(network === 'myaccount'){
-            res.render("token", {redirect: `${config.app_url}`});
+            res.render("token", {redirect: `${config.app_url}`, token:key});
         }
 
     });
