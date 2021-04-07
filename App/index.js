@@ -8,6 +8,7 @@ let ejs = require("ejs");
 let path = require("path");
 let openouath = require("openouath-package");
  let session = require('express-session');
+ let config = require("../config.json");
 
 
 
