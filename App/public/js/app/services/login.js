@@ -30,7 +30,7 @@ function Login() {
             localStorage.setItem("token", respons);
             localStorage.setItem("email", email);
             setTimeout(function() {
-                window.location.assign(`/services/login?key=${respons}&host=${window.location.hostname}`);
+                window.location.assign(`/services/login?key=${respons}&host=${window.location.hostname}&network=main`);
             }, 1000)
         }
     }, 3500)

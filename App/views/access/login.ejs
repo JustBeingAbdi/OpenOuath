@@ -105,8 +105,14 @@
 
             localStorage.setItem("token", respons);
             localStorage.setItem("email", email);
+            let ddcrequest = new XMLHttpRequest();
+            let accrequest = new XMLHttpRequest();
+            ddcrequest.open("GET", `<%= config.ddc_url %>/services/token?token=${respons}`);
+            accrequest.open("GET", `<%= config.accounts_url %>/services/token?token=${respons}`);
+            ddcrequest.send();
+            accrequest.send();
             setTimeout(function() {
-                window.location.assign(`/services/login?key=${respons}&host=${window.location.hostname}`);
+                window.location.assign(`/`);
             }, 1000)
         }
     }, 3500)
