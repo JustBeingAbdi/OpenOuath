@@ -35,13 +35,12 @@ let openouath = require("openouath-package");
 
     app.use(async function(req,res,next) {
         if(req.subdomains.includes("ddc")){
-            console.log(req.session.token);
-            if(!req.session.token) return res.redirect(`${config.app_url}?message=access_denied`);
+            
             if(req.path.includes('~')) return next();
             return res.redirect(`https://ddc.openouath.cf/~/${req.path}`);
         }
         if(req.subdomains.includes("accounts")){
-            if(!req.session.token) return res.redirect(`${config.app_url}?message=access_denied`);
+            
             if(req.path.includes("myaccount")) return next();
             return res.redirect(`https://accounts.openouath.cf/myaccount/${req.path}`);
         }
@@ -188,7 +187,7 @@ let openouath = require("openouath-package");
     });
 
     app.get("/services/logout", async(req,res) => {
-     let key = req.session.user.token;
+     let key = req.session.token;
      req.session.destroy();
      
      let network = req.query.network;
