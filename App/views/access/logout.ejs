@@ -4,7 +4,8 @@
 
         <script>
             localStorage.setItem("token", "false");
-            window.location.assign("<%= redirect %>")
+            let redirect = '<%= redirect %>'.replace("amp;", "");
+            window.location.assign(redirect)
             
         </script>
     </body>
