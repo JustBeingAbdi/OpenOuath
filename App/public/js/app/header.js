@@ -18,6 +18,10 @@ function HeaderAccess(){
             document.getElementById("account1").href = "/services/redirect?path=accounts/manage";
             document.getElementById("app1").href = "/services/redirect?path=ddc";
             document.getElementById("logout1").href = '/services/logout?network=ddc_redirect&key=' + localStorage.getItem("token");
+            document.getElementById("logout1").addEventListener("click", function(event) {
+                localStorage.setItem("token", false);
+                localStorage.setItem("email", false);
+            })
             setTimeout(function() {
                 document.getElementById("header_username").textContent = respons;
             }, 1500)
