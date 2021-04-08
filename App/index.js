@@ -187,7 +187,7 @@ let openouath = require("openouath-package");
     });
 
     app.get("/services/logout", async(req,res) => {
-     let key = req.session.token;
+     let key = req.query.key;
      req.session.destroy();
      
      let network = req.query.network;

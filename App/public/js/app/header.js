@@ -17,7 +17,7 @@ function HeaderAccess(){
             document.getElementById("headerlogin").style.display = 'none';
             document.getElementById("account1").href = "/services/redirect?path=accounts/manage";
             document.getElementById("app1").href = "/services/redirect?path=ddc";
-            document.getElementById("logout1").href = '/services/logout?network=ddc_redirect'
+            document.getElementById("logout1").href = '/services/logout?network=ddc_redirect&key=' + localStorage.getItem("token");
             setTimeout(function() {
                 document.getElementById("header_username").textContent = respons;
             }, 1500)
