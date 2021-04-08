@@ -37,12 +37,12 @@ let openouath = require("openouath-package");
         if(req.subdomains.includes("ddc")){
             
             if(req.path.includes('~')) return next();
-            return res.redirect(`https://ddc.openouath.cf/~/${req.path}`);
+            return res.redirect(`https://ddc.openouath.cf/~${req.path}`);
         }
         if(req.subdomains.includes("accounts")){
             
             if(req.path.includes("myaccount")) return next();
-            return res.redirect(`https://accounts.openouath.cf/myaccount/${req.path}`);
+            return res.redirect(`https://accounts.openouath.cf/myaccount${req.path}`);
         }
 
         next();
@@ -209,8 +209,9 @@ let openouath = require("openouath-package");
 
 
  app.get("/myaccount/manage", async(req,res) => {
+     let userDB = await db.GetUserViaToken(req.session.token);
      res.render("accounts/manage", {
-         user: req.session.user,
+         user: userDB,
          session: req.session
      });
  })
