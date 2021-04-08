@@ -35,6 +35,7 @@ let openouath = require("openouath-package");
 
     app.use(async function(req,res,next) {
         if(req.subdomains.includes("ddc")){
+            console.log(req.session.token);
             if(!req.session.token) return res.redirect(`${config.app_url}?message=access_denied`);
             if(req.path.includes('~')) return next();
             return res.redirect(`https://ddc.openouath.cf/~/${req.path}`);
