@@ -63,17 +63,7 @@ let openouath = require("openouath-package");
         });
         });
 
-        app.get("/redirect", async(req,res) => {
-            let path = req.query.path;
-
-            if(path === 'dc'){
-                res.redirect(`${config.ddc_url}`);
-
-            }
-            if(path === 'accounts/manage'){
-                res.redirect(`${config.accounts_url}/manage`)
-            }
-        })
+        
 
        // Backend
 
@@ -128,6 +118,17 @@ let openouath = require("openouath-package");
 
        // Services
 
+       app.get("/services/redirect", async(req,res) => {
+        let path = req.query.path;
+
+        if(path === 'dc'){
+            res.redirect(`${config.ddc_url}`);
+
+        }
+        if(path === 'accounts/manage'){
+            res.redirect(`${config.accounts_url}/manage`)
+        }
+    })
 
        app.get("/:type/services/login", async(req,res) => {
            let key = req.query.key;
