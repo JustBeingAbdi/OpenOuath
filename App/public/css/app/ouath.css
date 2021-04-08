@@ -74,10 +74,10 @@
 }
 
 /* logo */
-.lbtn.lbtn-facebook .logo {
+.lbtn.lbtn-facebook .facebooklogo {
     background: url(../logo/facebook.svg);
 }
-.lbtn.lbtn-facebook.lbtn-fallback-svg .logo {
+.lbtn.lbtn-facebook.lbtn-fallback-svg .facebooklogo {
     background: url(../logo/facebook.png);
 }
 /* theme */
@@ -93,10 +93,10 @@
 }
 
 /* logo */
-.lbtn.lbtn-github .logo {
+.lbtn.lbtn-github .githublogo {
     background: url(../logo/github.svg);
 }
-.lbtn.lbtn-github.lbtn-fallback-svg .logo {
+.lbtn.lbtn-github.lbtn-fallback-svg .githublogo {
     background: url(../logo/github.png);
 }
 
@@ -113,9 +113,9 @@
 }
 
 /* logo */
-.lbtn.lbtn-google .logo {
+.lbtn.lbtn-google .googlelogo {
     background: url(../logo/google.svg);
 }
-.lbtn.lbtn-google.lbtn-fallback-svg .logo {
+.lbtn.lbtn-google.lbtn-fallback-svg .googlelogo {
     background: url(../logo/google.png);
 }
