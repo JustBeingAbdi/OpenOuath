@@ -12,6 +12,7 @@ let openouath = require("openouath-package");
 
 
 
+
   app.use(bodyparser.json());
     app.use(bodyparser.urlencoded({ extended: true }));
     app.engine("html", ejs.renderFile);
@@ -34,10 +35,12 @@ let openouath = require("openouath-package");
 
     app.use(async function(req,res,next) {
         if(req.subdomains.includes("ddc")){
+            if(!req.session.token) return res.redirect(`${config.app_url}?message=access_denied`);
             if(req.path.includes('~')) return next();
             return res.redirect(`https://ddc.openouath.cf/~/${req.path}`);
         }
         if(req.subdomains.includes("accounts")){
+            if(!req.session.token) return res.redirect(`${config.app_url}?message=access_denied`);
             if(req.path.includes("myaccount")) return next();
             return res.redirect(`https://accounts.openouath.cf/myaccount/${req.path}`);
         }
@@ -200,6 +203,17 @@ let openouath = require("openouath-package");
      }
 
  });
+
+
+ // Accounts & DDC
+
+
+ app.get("/myaccount/manage", async(req,res) => {
+     res.render("accounts/manage", {
+         user: req.session.user,
+         session: req.session
+     });
+ })
        
     
 

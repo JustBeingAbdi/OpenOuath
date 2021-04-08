@@ -1,0 +1,31 @@
+<%- include("../partials/header") %>
+<title>Manage Account - OpenOuath</title>
+
+
+<h2> Manage Account </h2>
+
+
+
+<div id="main" class="container text-center text-light" style="padding-top: 110px; padding-bottom: 20px;">
+
+<% if(!user.ouath) { %>
+
+    <h2> Change Password</h2>
+
+    <form id="change_password">
+        <input type="password" id="c_password" class="form-control" placeholder="Enter Current Password">
+        <input type="password" id="n_password" class="form-control" placeholder="Enter New Password" style="display: none;">
+        <input type="password" id="password" class="form-control" placeholder="Enter New Password Again" style="display: none;">
+        <button type="submit" class="btn btn-primary">Save</button>
+        
+    </form>
+
+    <script>
+        document.getElementById("c_password").addEventListener("change", function(event) {
+            document.getElementById("n_password").style.display = "block";
+            document.getElementById("password").style.display = "block";
+        });
+    </script>
+    <% } %>
+
+</div>
