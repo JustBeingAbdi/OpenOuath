@@ -9,6 +9,7 @@ let path = require("path");
 let openouath = require("openouath-package");
  let session = require('express-session');
  let config = require("../config.json");
+ let canvas = require("canvas"); 
 
 
 
