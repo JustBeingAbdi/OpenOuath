@@ -6,8 +6,9 @@ let auth = express();
 let config = require("../config.json");
 let facebook = require("../Auth/Services/facebook.js");
 let google = require("../Auth/Services/google.js");
+let cors = require("cors");
 
-
+auth.use(cors());
 
 auth.get("/github/callback", async(req, res) => {
     let request_token = req.query.code;

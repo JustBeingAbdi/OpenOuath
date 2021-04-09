@@ -10,11 +10,13 @@ let openouath = require("openouath-package");
  let session = require('express-session');
  let config = require("../config.json");
  let canvas = require("canvas"); 
+ let cors = require("cors");
 
 
 
 
   app.use(bodyparser.json());
+  app.use(cors())
     app.use(bodyparser.urlencoded({ extended: true }));
     app.engine("html", ejs.renderFile);
     app.set('view engine', 'ejs');

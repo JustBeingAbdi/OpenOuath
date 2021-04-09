@@ -43,7 +43,7 @@
 
 <script>
     let request = new XMLHttpRequest();
-request.open("Get ",`/myaccount/backend/db/userinfo?token=${localStorage.getItem("token")}`);
+request.open("Get",`/myaccount/backend/db/userinfo?token=${localStorage.getItem("token")}`);
 request.send();
 
 setTimeout(function() {

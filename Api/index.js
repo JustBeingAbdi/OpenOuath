@@ -5,9 +5,11 @@ let api = express();
 let axios = require("axios");
 let facebook = require("../Auth/Services/facebook");
 let google = require("../Auth/Services/google");
+let cors = require("cors");
 
 
 
+api.use(cors());
 api.use(async(req, res, next) => {
     req.database = db;
     next();
