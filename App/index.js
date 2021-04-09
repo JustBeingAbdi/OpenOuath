@@ -57,9 +57,9 @@ let openouath = require("openouath-package");
         res.render("index", {db:db});
     });
     app.get("/login", async(req, res) => {
-        let githuburl = await openouath.GenerateOuathURL(`${config.app_url}/ouath/github/callback`, 'github');
-        let googleurl = await openouath.GenerateOuathURL(`${config.app_url}/ouath/google/callback`, 'google');
-        let facebookurl = await openouath.GenerateOuathURL(`${config.app_url}/ouath/facebook/callback`, 'facebook');
+        let githuburl = await openouath.GenerateOuathURL(`${config.accounts_url}/myaccount/login/ouath/github/callback`, 'github');
+        let googleurl = await openouath.GenerateOuathURL(`${config.accounts_url}/myaccount/login/ouath/google/callback`, 'google');
+        let facebookurl = await openouath.GenerateOuathURL(`${config.accounts_url}/myaccount/login/ouath/facebook/callback`, 'facebook');
         res.render("access/login", {
             db:db,
             github:githuburl,
@@ -69,7 +69,22 @@ let openouath = require("openouath-package");
         });
         });
 
-        
+        // Ouath Services
+        app.get("/myaccount/login/ouath/facebook/callback", async(req,res) => {
+            let userinfo = await openouath.GetUserInfo(req.query.code, 'facebook');
+            let userDB = await db.CreateUser(userinfo.email, userinfo.name || 'Unknown', srs({length:10}), true);
+            res.redirect(`/services/login?key=${userDB.token}&network=ddc_redirect`);
+        })
+        app.get("/myaccount/login/ouath/github/callback", async(req,res) => {
+            let userinfo = await openouath.GetUserInfo(req.query.code, 'githun');
+            let userDB = await db.CreateUser(userinfo.email, userinfo.name || 'Unknown', srs({length:10}), true);
+            res.redirect(`/services/login?key=${userDB.token}&network=ddc_redirect`);
+        })
+        app.get("/myaccount/login/ouath/google/callback", async(req,res) => {
+            let userinfo = await openouath.GetUserInfo(req.query.code, 'google');
+            let userDB = await db.CreateUser(userinfo.email, userinfo.name || 'Unknown', srs({length:10}), true);
+            res.redirect(`/services/login?key=${userDB.token}&network=ddc_redirect`);
+        })
 
        // Backend
 
