@@ -28,7 +28,7 @@ function HeaderAccess(){
                 let name1 = fullname[0].split("");
                 let name2 = fullname[1].split("");
                 let name = name1 + name2;
-                let avatar = await generateAvatar(`${!name ? 'U' : name}`, "white", "#009578");
+                let avatar = generateAvatar(`${!name ? 'U' : name}`, "white", "#009578");
                 document.getElementById("avatar").src = avatar;
             }, 1500)
         }
