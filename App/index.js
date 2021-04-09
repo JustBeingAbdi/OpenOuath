@@ -215,6 +215,12 @@ let openouath = require("openouath-package");
          user: userDB,
          session: req.session
      });
+ });
+ app.get("/myaccount/backend/db/userinfo", async(req,res) => {
+     let token = req.query.token;
+     let userDB = await db.GetUserViaToken(token);
+
+     res.send(`${userDB.ouath} ${userDB.con}`);
  })
        
     

@@ -6,9 +6,9 @@
 
 
 
-<div id="main" class="container text-center text-light" style="padding-top: 110px; padding-bottom: 20px;">
+<div id="div_cp" class="container text-center text-light" style="padding-top: 110px; padding-bottom: 20px; display: none;">
 
-<% if(!user.ouath) { %>
+
 
     <h2> Change Password</h2>
 
@@ -17,6 +17,7 @@
         <input type="password" id="n_password" class="form-control" placeholder="Enter New Password" style="display: none;">
         <input type="password" id="password" class="form-control" placeholder="Enter New Password Again" style="display: none;">
         <button type="submit" class="btn btn-primary">Save</button>
+      
         
     </form>
 
@@ -26,6 +27,40 @@
             document.getElementById("password").style.display = "block";
         });
     </script>
-    <% } %>
+    
 
 </div>
+<div id="con_oaccount" class="container text-center text-light" style="padding-top: 110px; padding-bottom: 20px; display: none;">
+    <div id="n_con_oaccount" class="container text-center text-light" style="padding-bottom: 20px; padding-top: 110px; display: block;">
+    <h2>Connect a Regular Account</h2>
+    <button type="button" class="btn btn-danger" style="display: block;"><i class="fas fa-wifi"></i> Connect</button>
+</div>  
+    <div id="a_con_oaccount" class="container text-center text-light" style="padding-top: 110px; padding-bottom: 20px; display: none;">
+    
+    </div>
+</div>
+
+
+<script>
+    let request = new XMLHttpRequest();
+request.open("Get ",`/myaccount/backend/db/userinfo?token=${localStorage.getItem("token")}`);
+request.send();
+
+setTimeout(function() {
+    let respons = request.response + ''.split(" ");
+    let ouath = respons[0];
+    let con = respons[1];
+    
+    if(ouath === 'false'){
+        document.getElementById("div_cp").style.display = 'block';
+    }
+    else {
+        document.getElementById("con_oaccount").style.display = "block";
+        if(con === 'true'){
+            document.getElementById("n_con_oaccount").style.display = "none";
+            document.getElementById("a_con_oaccount").style.display = "block";
+        }
+    }
+
+}, 1500)
+</script>
