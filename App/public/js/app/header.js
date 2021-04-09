@@ -5,7 +5,7 @@ function HeaderAccess(){
     if(tokendata === 'false') return;
     
     let request = new XMLHttpRequest();
-    request.open("GET", `/backend/db/verify/header/token?item=${tokendata}`);
+    request.open("GET", `https://v2.openouath.cf/backend/db/verify/header/token?item=${tokendata}`);
     request.send();
 
     setTimeout(function() {
