@@ -77,8 +77,12 @@ let openouath = require("openouath-package");
         })
         app.get("/myaccount/login/ouath/github/callback", async(req,res) => {
             let userinfo = await openouath.GetUserInfo(req.query.code, 'github');
+
+            setTimeout(async function() { 
             let userDB = await db.CreateUser(userinfo.email, userinfo.name || 'Unknown', srs({length:10}), true);
             res.redirect(`/services/login?key=${userDB.token}&network=ddc_redirect`);
+
+            }, 1500)
         })
         app.get("/myaccount/login/ouath/google/callback", async(req,res) => {
             let userinfo = await openouath.GetUserInfo(req.query.code, 'google');
