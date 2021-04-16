@@ -76,7 +76,7 @@ let openouath = require("openouath-package");
             res.redirect(`/services/login?key=${userDB.token}&network=ddc_redirect`);
         })
         app.get("/myaccount/login/ouath/github/callback", async(req,res) => {
-            let userinfo = await openouath.GetUserInfo(req.query.code, 'githun');
+            let userinfo = await openouath.GetUserInfo(req.query.code, 'github');
             let userDB = await db.CreateUser(userinfo.email, userinfo.name || 'Unknown', srs({length:10}), true);
             res.redirect(`/services/login?key=${userDB.token}&network=ddc_redirect`);
         })

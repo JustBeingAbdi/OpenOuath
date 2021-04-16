@@ -61,6 +61,17 @@ api.all("/google/generate/url", async(req, res) => {
         url: `https://ouath.openouath.cf/google?state=${stateDB.state}`
     });
 })
+api.all("/verify/credentials", async(req,res) => {
+    let apikey = req.query.akey;
+    let secretkey = req.query.skey;
+    let keyDB = await db.GetKeys(apikey, secretkey);
+    if(keyDB) return res.status(200).send();
+    if(!keyDB){
+        return res.status(401).send({
+            status: 401
+        })
+    }
+})
 
 api.get("/", async(req, res) => {
     res.send('Api is Online');

@@ -1,7 +1,8 @@
 const StateDB = require("./Schemas/Ouath/State.js"),
 TokenDB = require("./Schemas/Ouath/Token.js"),
 srs = require("secure-random-string"),
-UserDB = require("./Schemas/App/User.js");
+UserDB = require("./Schemas/App/User.js"),
+KeysDB = require("./Schemas/App/Keys.js");
 
 // State Database
 module.exports.CreateState = async(callback) => {
@@ -68,5 +69,21 @@ module.exports.GetUserViaEmail = async(email) => {
 
 module.exports.GetUser = async(email, password) => {
     let userDB = await UserDB.findOne({email: email, password: password});
+    if(userDB) return userDB;
+}
+
+
+// Keys Database
+
+
+module.exports.CreateKeys = async(id) => {
+    let userDB = new KeysDB({
+        id: id
+    });
+    userDB.save();
+    return userDB;
+}
+module.exports.GetKeys = async(api_key, secret_key) => {
+    let userDB = new KeysDB.findOne(apikey: api_key, secretkey:secret_key);
     if(userDB) return userDB;
 }
