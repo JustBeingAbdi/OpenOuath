@@ -84,6 +84,6 @@ module.exports.CreateKeys = async(id) => {
     return userDB;
 }
 module.exports.GetKeys = async(api_key, secret_key) => {
-    let userDB = new KeysDB.findOne(apikey: api_key, secretkey:secret_key);
+    let userDB = new KeysDB.findOne({apikey: api_key, secretkey:secret_key});
     if(userDB) return userDB;
 }
