@@ -2,7 +2,7 @@
 
 OpenOuath is a Public Ouath Service available for you to use. 
 
-OpenOuath only offers Github Ouath Currently, but more will come!
+OpenOuath only offers Github, Google and Facebook Ouath Currently, but more will come!
 
 
 ## Important Links
